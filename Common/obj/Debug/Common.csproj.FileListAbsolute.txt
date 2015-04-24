@@ -1,0 +1,10 @@
+C:\Xactimed.net\SsoPoc\Solution1\Common\bin\Debug\Common.dll
+C:\Xactimed.net\SsoPoc\Solution1\Common\bin\Debug\Common.pdb
+C:\Xactimed.net\SsoPoc\Solution1\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Xactimed.net\SsoPoc\Solution1\Common\obj\Debug\Common.dll
+C:\Xactimed.net\SsoPoc\Solution1\Common\obj\Debug\Common.pdb
+C:\Xactimed.net\MedAssets_SSO2\PocSamples\Common\bin\Debug\Common.dll
+C:\Xactimed.net\MedAssets_SSO2\PocSamples\Common\bin\Debug\Common.pdb
+C:\Xactimed.net\MedAssets_SSO2\PocSamples\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Xactimed.net\MedAssets_SSO2\PocSamples\Common\obj\Debug\Common.dll
+C:\Xactimed.net\MedAssets_SSO2\PocSamples\Common\obj\Debug\Common.pdb
