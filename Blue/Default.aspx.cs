@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Web.UI;
 using Common;
 
+// Libraries Added
+using System.Threading;
+using Microsoft.IdentityModel.Claims;
+
 namespace Blue
 {
     public partial class _Default : Page
@@ -17,7 +21,16 @@ namespace Blue
             btn_Manager.Enabled = isPowerUser;
             btn_User.Enabled = isAuthorizedUser;
 
-            txtSaml.Text = @"{SAML CONTENT}";
+            txtSaml.Text = @"Please login to view SAML token content.";
+
+            if (User.Identity.IsAuthenticated) 
+            {
+                var samlText = string.Empty;
+                IClaimsIdentity ci = Thread.CurrentPrincipal.Identity as IClaimsIdentity;
+                foreach (Claim claim in ci.Claims)
+                    samlText += claim.ClaimType + ":   " + claim.Value + "\n\n";
+                txtSaml.Text = samlText;   
+            }
         }
 
         protected void btn_Create_Click(object sender, EventArgs e)

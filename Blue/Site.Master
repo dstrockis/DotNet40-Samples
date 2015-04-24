@@ -27,27 +27,24 @@
                 <p class="site-title"><a runat="server" href="~/" style="color: blue">Welcome to BLUE Web App</a></p>
             </div>
             <div class="float-right">
-                <section id="login">
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul>
-                                <li><a id="loginLink" runat="server" href="~/Account/Login">Log in</a></li>
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <p>
-                                Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
-                                    <asp:LoginName runat="server" CssClass="username" />
-                                </a>!
-                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
-                            </p>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
-                </section>
+                <% if(Page.User.Identity.IsAuthenticated) %>
+                <% { %>
+                    <p>Hello, <asp:LoginName runat="server" CssClass="username" />!</p>
+                <% } %>
+                <% else { %>
+                    <br />
+                <% } %>
+
                 <nav>
                     <ul id="menu">
                         <li><a href="http://localhost:53618/" target="_blank">RED Web App</a></li>
-                        <li><a runat="server" href="~/Account/Logout">Logout</a></li>
+                        <% if(Page.User.Identity.IsAuthenticated) %>
+                        <% { %>
+                            <li><a runat="server" href="~/Account/Logout">Logout</a></li>
+                        <% } %>
+                        <% else { %>
+                            <li><a runat="server" href="~/Account/Login">Login</a></li>
+                        <% } %>
                     </ul>
                 </nav>
             </div>

@@ -7,7 +7,9 @@ namespace Blue.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // S
+            // Sign in to this page is controlled in web.config
+            if (Page.User.Identity.IsAuthenticated)
+                Server.Transfer("~/Default.aspx");
         }
     }
 }
