@@ -16,7 +16,7 @@ namespace Blue.Account
 
             // Issue a sign out request to remove the STS session, etc.
             SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Realm);
-            String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + fedAuthenticationModule.Realm;
+            String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
             Response.Redirect(signOutRequest);
         }
     }
