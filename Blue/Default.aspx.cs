@@ -43,9 +43,66 @@ namespace Blue
 
         protected void btn_getUserGroup_Click(object sender, EventArgs e)
         {
+            GetGroupsStatus.Visible = false;
             // TODO show the process of calling your API to get extra authentication info. This is limited for Admin only
             lst_UserGroups.DataSource = new List<string> {"dummy group/role 1", "dummy group/role 2", "dummy group/role 3"};
             lst_UserGroups.DataBind();
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/Account/Login");
+                return;
+            }
+
+            try
+            {
+                ClientCredential cc = new ClientCredential(ConfigurationManager.AppSettings["ida:ClientId"], ConfigurationManager.AppSettings["ida:AppKey"]);
+                IClaimsIdentity ci = User.Identity as IClaimsIdentity;
+                Predicate<Claim> match = FindTenantClaim;
+                IList<Claim> tenantIdClaims = ci.Claims.FindAll(match) as IList<Claim>;
+                string tenantId = tenantIdClaims[0].Value;
+                AuthenticationContext authContext = new AuthenticationContext(String.Format(TenantConfig.authorityFormat, tenantId));
+                AuthenticationResult ar = authContext.AcquireToken(TenantConfig.graphResourceId, cc);
+
+                HttpClient httpClient = new HttpClient();
+                string graphRequest = TenantConfig.graphEndpoint + tenantId + "/groups?api-version=" + TenantConfig.graphApiVersion;
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, graphRequest);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ar.AccessToken);
+                HttpResponseMessage response = httpClient.SendAsync(request).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    List<string> groups = new List<string>();
+                    JavaScriptSerializer jss = new JavaScriptSerializer();
+                    string serializedJson = response.Content.ReadAsStringAsync().Result;
+                    GraphGroupResult ggr = jss.Deserialize<GraphGroupResult>(serializedJson);
+                    foreach (Value group in ggr.value)
+                        groups.Add(group.displayName);
+                    lst_UserGroups.DataSource = groups;
+                    lst_UserGroups.DataBind();
+                }
+                else
+                {
+                    throw new WebException(response.Content.ReadAsStringAsync().Result);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Authorization_IdentityNotFound"))
+                {
+                    GetGroupsStatus.Text = "Your admin needs to sign in once before you can get groups.";
+                    GetGroupsStatus.Visible = true;
+                    GetGroupsStatus.ForeColor = Color.Red;
+                    return;
+                }
+
+                GetGroupsStatus.Text = "An error occurred when getting groups: " + ex.Message;
+                GetGroupsStatus.Visible = true;
+                GetGroupsStatus.ForeColor = Color.Red;
+                return;
+            }
+
         }
 
         protected void ButtonCreate_Click(object sender, EventArgs e)
@@ -132,6 +189,14 @@ namespace Blue
                 CreateUserStatus.ForeColor = Color.Red;
                 return;
             }
+        }
+
+        private static bool FindTenantClaim(Claim claim)
+        {
+            if (claim.ClaimType == "http://schemas.microsoft.com/identity/claims/tenantid")
+                return true;
+
+            return false;
         }
     }
 }

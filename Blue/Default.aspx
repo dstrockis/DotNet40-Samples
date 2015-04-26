@@ -35,6 +35,8 @@
                 <table width="100%"><tr><td><label>Available Groups/Roles</label></td><td style="text-align: right"><asp:Button ID="btn_getUserGroup" runat="server" Text="Refresh" OnClick="btn_getUserGroup_Click" /></td></tr></table>
                 
                 <asp:ListBox ID="lst_UserGroups" runat="server" Width="100%" Height="203px"></asp:ListBox>
+                <label class="form_label"></label>
+                <asp:Label runat="server" Text="" ID="GetGroupsStatus" Visible="false" Width="300px"></asp:Label>
             </td>
 
         </tr>
