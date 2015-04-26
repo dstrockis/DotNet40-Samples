@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <span>You have been logged out</span>
+        <span>You have been logged out due to inactivity.</span>
     </div>
     </form>
 </body>

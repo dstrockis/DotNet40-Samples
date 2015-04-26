@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using System.Net;
 using System.Drawing;
+using System.Linq;
 
 namespace Blue
 {
@@ -58,14 +59,12 @@ namespace Blue
             {
                 ClientCredential cc = new ClientCredential(ConfigurationManager.AppSettings["ida:ClientId"], ConfigurationManager.AppSettings["ida:AppKey"]);
                 IClaimsIdentity ci = User.Identity as IClaimsIdentity;
-                Predicate<Claim> match = FindTenantClaim;
-                IList<Claim> tenantIdClaims = ci.Claims.FindAll(match) as IList<Claim>;
-                string tenantId = tenantIdClaims[0].Value;
-                AuthenticationContext authContext = new AuthenticationContext(String.Format(TenantConfig.authorityFormat, tenantId));
+                Claim tid = ci.Claims.Where(c => c.ClaimType == "http://schemas.microsoft.com/identity/claims/tenantid").First();
+                AuthenticationContext authContext = new AuthenticationContext(String.Format(TenantConfig.authorityFormat, tid.Value));
                 AuthenticationResult ar = authContext.AcquireToken(TenantConfig.graphResourceId, cc);
 
                 HttpClient httpClient = new HttpClient();
-                string graphRequest = TenantConfig.graphEndpoint + tenantId + "/groups?api-version=" + TenantConfig.graphApiVersion;
+                string graphRequest = TenantConfig.graphEndpoint + tid.Value + "/groups?api-version=" + TenantConfig.graphApiVersion;
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, graphRequest);
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ar.AccessToken);
                 HttpResponseMessage response = httpClient.SendAsync(request).Result;
@@ -189,14 +188,6 @@ namespace Blue
                 CreateUserStatus.ForeColor = Color.Red;
                 return;
             }
-        }
-
-        private static bool FindTenantClaim(Claim claim)
-        {
-            if (claim.ClaimType == "http://schemas.microsoft.com/identity/claims/tenantid")
-                return true;
-
-            return false;
         }
     }
 }

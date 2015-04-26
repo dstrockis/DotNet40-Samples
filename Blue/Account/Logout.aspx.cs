@@ -10,14 +10,16 @@ namespace Blue.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Remove the application cookies, etc.
-            WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
-            WsFam.SignOut(false);
+            if (User.Identity.IsAuthenticated) {
+                // Remove the application cookies, etc.
+                WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
+                WsFam.SignOut(false);
 
-            // Issue a sign out request to remove the STS session, etc.
-            SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply);
-            String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
-            Response.Redirect(signOutRequest);
+                // Issue a sign out request to remove the STS session, etc.
+                SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply);
+                String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
+                Response.Redirect(signOutRequest);
+            }
         }
     }
 }
