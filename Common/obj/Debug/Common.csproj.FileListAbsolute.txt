@@ -19,3 +19,8 @@ C:\Users\dastrock\Desktop\PocSamples - Copy\PocSamples\Common\bin\Debug\Microsof
 C:\Users\dastrock\Desktop\PocSamples - Copy\PocSamples\Common\obj\Debug\Common.dll
 C:\Users\dastrock\Desktop\PocSamples - Copy\PocSamples\Common\obj\Debug\Common.pdb
 C:\Users\dastrock\Desktop\PocSamples - Copy\PocSamples\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Common\bin\Debug\Common.dll
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Common\bin\Debug\Common.pdb
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Common\bin\Debug\Microsoft.IdentityModel.dll
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Common\obj\Debug\Common.dll
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Common\obj\Debug\Common.pdb

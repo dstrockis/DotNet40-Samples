@@ -9,7 +9,7 @@ namespace Blue.Account
         {
             // Sign in to this page is controlled in web.config
             if (Page.User.Identity.IsAuthenticated)
-                Server.Transfer("~/Default.aspx");
+                Response.Redirect("/");
         }
     }
 }

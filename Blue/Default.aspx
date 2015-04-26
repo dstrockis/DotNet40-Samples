@@ -24,9 +24,12 @@
                     <label class="form_label">Client:</label><asp:DropDownList ID="ddlClient" runat="server">
                         <asp:ListItem>Hospital System A</asp:ListItem>
                         <asp:ListItem>Hospital System B</asp:ListItem>
+                        <asp:ListItem>Default Tenant</asp:ListItem>
                     </asp:DropDownList>
-                    
-&nbsp;<label class="form_label"></label><asp:Button ID="btn_Create" runat="server" Text="Create" OnClick="btn_Create_Click" />
+                    <label class="form_label"></label>
+                    <asp:Button ID="ButtonCreate" runat="server" OnClick="ButtonCreate_Click" Text="Create" />
+                    <label class="form_label"></label>
+                    <asp:Label runat="server" Text="" ID="CreateUserStatus" Visible="false" Width="300px"></asp:Label>
                 </fieldset>
                 
                 <table width="100%"><tr><td><label>Available Groups/Roles</label></td><td style="text-align: right"><asp:Button ID="btn_getUserGroup" runat="server" Text="Refresh" OnClick="btn_getUserGroup_Click" /></td></tr></table>

@@ -14,7 +14,7 @@
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" action="Default.aspx">
     <asp:ScriptManager runat="server">
         <Scripts>
             <asp:ScriptReference Name="jquery" />
