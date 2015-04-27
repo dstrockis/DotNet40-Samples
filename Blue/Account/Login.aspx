@@ -11,8 +11,8 @@
 <%--    <div>
         <wif:FederatedPassiveSignIn ID="AzureADAuth" runat="server"
             Issuer ="https://login.microsoftonline.com/60ffe505-3ef1-47e2-8553-2bbe12dd494f/wsfed"
-            Realm="http://localhost:9654/"
-            Reply="http://localhost:9654/Account/Login.aspx"
+            Realm="https://localhost:44331/"
+            Reply="https://localhost:44331/Account/Login.aspx"
             VisibleWhenSignedIn="false"
             OnSignInError="AzureADAuth_SignInError"
             RequireHttps="false">

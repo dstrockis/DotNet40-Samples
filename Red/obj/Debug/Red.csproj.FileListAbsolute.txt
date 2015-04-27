@@ -36,6 +36,9 @@ C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Red.pdb
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Antlr3.Runtime.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Common.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\EntityFramework.dll
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Newtonsoft.Json.dll
@@ -50,6 +53,7 @@ C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\System.Web.WebPages.
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\System.Web.WebPages.Razor.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\WebGrease.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Common.pdb
+C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\EntityFramework.xml
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Newtonsoft.Json.xml
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\System.Net.Http.xml
@@ -62,7 +66,3 @@ C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\System.Web.WebPages.
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\obj\Debug\Red.csprojResolveAssemblyReference.cache
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\obj\Debug\Red.dll
 C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\obj\Debug\Red.pdb
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.dll
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Red\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml

@@ -37,7 +37,7 @@
 
                 <nav>
                     <ul id="menu">
-                        <li><a href="http://localhost:53618/" target="_blank">RED Web App</a></li>
+                        <li><a href="https://localhost:44330/" target="_blank">RED Web App</a></li>
                         <% if(Page.User.Identity.IsAuthenticated) %>
                         <% { %>
                             <li><a runat="server" href="~/Account/Logout">Logout</a></li>

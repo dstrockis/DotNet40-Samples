@@ -8,13 +8,3 @@ C:\Users\dastrock\Desktop\PocSamples\PocSamples\Green\obj\Debug\Green.Properties
 C:\Users\dastrock\Desktop\PocSamples\PocSamples\Green\obj\Debug\Green.csproj.GenerateResource.Cache
 C:\Users\dastrock\Desktop\PocSamples\PocSamples\Green\obj\Debug\Green.exe
 C:\Users\dastrock\Desktop\PocSamples\PocSamples\Green\obj\Debug\Green.pdb
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\bin\Debug\Green.exe
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\bin\Debug\Green.pdb
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\bin\Debug\Common.dll
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\bin\Debug\Common.pdb
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\obj\Debug\Green.csprojResolveAssemblyReference.cache
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\obj\Debug\Green.Form1.resources
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\obj\Debug\Green.Properties.Resources.resources
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\obj\Debug\Green.csproj.GenerateResource.Cache
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\obj\Debug\Green.exe
-C:\Users\dastrock\Desktop\PocSamples - 4\PocSamples\Green\obj\Debug\Green.pdb

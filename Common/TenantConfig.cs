@@ -11,6 +11,7 @@ namespace Common
         public const string graphResourceId = "https://graph.windows.net/";
         public const string graphEndpoint = "https://graph.windows.net/";
         public const string graphApiVersion = "1.5";
+        public const string checkSessionEndpoint = "https://login.microsoftonline.com/60ffe505-3ef1-47e2-8553-2bbe12dd494f/oauth2/checksession";
 
         // You would pull this configuration data from somewhere else in a real system.
         static Dictionary<string, double> ClientSecurityRules = new Dictionary<string, double>

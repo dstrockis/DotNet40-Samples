@@ -18,10 +18,11 @@ namespace Red.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(string createUserStatus)
+        public ActionResult Index(string createUserStatus, string userCreatedStatus)
         {
             ViewBag.SamlContent = "Please login to view SAML token content.";
             ViewBag.CreateUserStatus = "";
+            ViewBag.UserCreatedStatus = "";
             if (Request.IsAuthenticated)
             {
                 var samlText = string.Empty;
@@ -34,6 +35,10 @@ namespace Red.Controllers
             if (createUserStatus != string.Empty)
             {
                 ViewBag.CreateUserStatus = createUserStatus;
+            }
+            if (userCreatedStatus != string.Empty)
+            {
+                ViewBag.UserCreatedStatus = userCreatedStatus;
             }
 
             return View();

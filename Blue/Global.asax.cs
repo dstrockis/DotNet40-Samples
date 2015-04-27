@@ -49,10 +49,10 @@ namespace Blue
                 WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
                 WsFam.SignOut(false);
 
-                // Issue a sign out request to remove the STS session, etc.
-                SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply + "Account/Logout");
-                String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
-                Response.Redirect(signOutRequest);
+                // Uncomment the following to end the session with AAD on inactivity timeout.  But this will cause a single sign out across all apps.
+                //SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply + "Account/Logout");
+                //String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
+                //Response.Redirect(signOutRequest);
             }
         }
     }

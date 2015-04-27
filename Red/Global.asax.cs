@@ -3,6 +3,7 @@ using Common;
 using Microsoft.IdentityModel.Protocols.WSFederation;
 using Microsoft.IdentityModel.Web;
 using System;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -25,6 +26,18 @@ namespace Red
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FederatedAuthentication.SessionAuthenticationModule.SessionSecurityTokenReceived += new EventHandler<SessionSecurityTokenReceivedEventArgs>(SessionAuthenticationModule_SessionSecurityTokenReceived);
             FederatedAuthentication.ServiceConfigurationCreated += FederatedAuthentication_ServiceConfigurationCreated;
+            FederatedAuthentication.WSFederationAuthenticationModule.SigningOut +=WSFederationAuthenticationModule_SigningOut;
+        }
+
+        private void WSFederationAuthenticationModule_SigningOut(object sender, SigningOutEventArgs e)
+        {
+            if (e.IsIPInitiated)
+            {
+                // Remove the application cookies, etc.
+                WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
+                HttpContext.Current.Session.Abandon();
+                Response.Cookies.Clear();
+            }
         }
 
         private void FederatedAuthentication_ServiceConfigurationCreated(object sender, Microsoft.IdentityModel.Web.Configuration.ServiceConfigurationCreatedEventArgs e)
@@ -40,10 +53,10 @@ namespace Red
                 WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
                 WsFam.SignOut(false);
 
-                // Issue a sign out request to remove the STS session, etc.
-                SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply + "Account/Logout");
-                String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
-                Response.Redirect(signOutRequest);
+                // Uncomment the following to end the session with AAD on inactivity timeout.  But this will result in a single sign out from all apps.
+                //SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply + "Account/Logout");
+                //String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
+                //Response.Redirect(signOutRequest);
             }
         }
     }

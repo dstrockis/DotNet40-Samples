@@ -118,9 +118,8 @@ namespace Red.Controllers
                 return new RedirectResult("/?createUserStatus=An error occurred when creating the user: " + ex.Message);
 
             }
-            
-            return new RedirectResult("/?createUserStatus=" + "User " + newUpn + " created with temporary password " + newPw + ".");
 
+            return new RedirectResult("/?userCreatedStatus=" + "User " + newUpn + " created with temporary password " + newPw + ".");
         }
     }
 }
