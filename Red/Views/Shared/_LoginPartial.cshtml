@@ -1,11 +1,9 @@
 ﻿@if (Request.IsAuthenticated) {
-    <text>
-        Hello, @User.Identity.Name  // TODO we encourage you extend the IIdentity to show user's display name.
-    </text>
+    <p>
+        Hello, @User.Identity.Name!
+    </p>
 }
 else
 {
-    <ul>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <br />
 }

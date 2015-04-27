@@ -45,10 +45,6 @@ namespace Blue
         protected void btn_getUserGroup_Click(object sender, EventArgs e)
         {
             GetGroupsStatus.Visible = false;
-            // TODO show the process of calling your API to get extra authentication info. This is limited for Admin only
-            lst_UserGroups.DataSource = new List<string> {"dummy group/role 1", "dummy group/role 2", "dummy group/role 3"};
-            lst_UserGroups.DataBind();
-
             if (!User.Identity.IsAuthenticated)
             {
                 Response.Redirect("/Account/Login");

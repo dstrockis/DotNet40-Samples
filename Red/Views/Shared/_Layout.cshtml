@@ -14,19 +14,22 @@
                 <p class="site-title">@Html.ActionLink("Welcome to RED Web App", "Index", "Home")</p>
             </div>
             <div class="float-right">
-                @{
-                    if (!User.Identity.IsAuthenticated)
-                    {
-                        <section id="login">
-                            @Html.Partial("_LoginPartial")
-                        </section>
-                    }
-                }
-
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
                 <nav>
                     <ul id="menu">
                         <li><a href="http://localhost:9654/Default.aspx" target="_blank">BLUE Web App</a></li>      <!-- TODO update the as it fit your environment -->
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        }
+
                     </ul>
                 </nav>
             </div>

@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Index";
 
-    //TODO make approperite mapping between your roles and these three roles
     bool isAuthorizedUser = User.IsInRole(RocRole.User) || User.IsInRole(RocRole.Manager) || User.IsInRole(RocRole.Admin);      
     bool isPowerUser = User.IsInRole(RocRole.Manager) || User.IsInRole(RocRole.Admin);
     bool isSuperUser = User.IsInRole(RocRole.Admin);
@@ -31,9 +30,10 @@
                 <label class="form_label">First Name:</label><input name="firstname"  type="text" /><br>
                 <label class="form_label">Last Name:</label><input name="lastname"  type="text" /><br>
                 <label class="form_label">Email/Username:</label><input name="username"  type="text" /><br>
-                <label class="form_label">Client:</label><select name="client" class="form_field" ><option>Hospital System A</option><option>Hospital System B</option></select><br>
+                <label class="form_label">Client:</label><select name="client" class="form_field" ><option>Hospital System A</option><option>Hospital System B</option><option>Default Tenant</option></select><br>
                 <label class="form_label"></label><input type="submit" value="Create" />
             </fieldset>
+            <label style="color:red;width:400px">@ViewBag.CreateUserStatus</label>
         }
     </div>
     
