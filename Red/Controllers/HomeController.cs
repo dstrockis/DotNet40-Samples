@@ -23,6 +23,8 @@ namespace Red.Controllers
             ViewBag.SamlContent = "Please login to view SAML token content.";
             ViewBag.CreateUserStatus = "";
             ViewBag.UserCreatedStatus = "";
+
+            // The SAML token contents are automatically populated in the ClaimsIdentity.
             if (Request.IsAuthenticated)
             {
                 var samlText = string.Empty;
@@ -44,13 +46,14 @@ namespace Red.Controllers
             return View();
         }
 
-        // Could use Authorize Tags here instead of IsInRole below
+        // You Could use [Authorize(Roles=)] Tags here instead of IsInRole below
         public ActionResult GetUserGroups()
         {
             var usergroups = new List<UserGroup>();
 
             ViewBag.GetGroupsStatus = "";
 
+            // It is up to the application to ensure that only admins can read groups.
             if (!User.Identity.IsAuthenticated || !User.IsInRole(RocRole.Admin))
             {
                 ViewBag.GetGroupsStatus = "You must sign in as an admin to view Groups.";
@@ -59,6 +62,7 @@ namespace Red.Controllers
 
             try
             {
+                // Get a token for the Graph API in the context of the user's tenant.  Admins from hospital A can't see groups in hopital B.
                 ClientCredential cc = new ClientCredential(ConfigurationManager.AppSettings["ida:ClientId"], ConfigurationManager.AppSettings["ida:AppKey"]);
                 IClaimsIdentity ci = User.Identity as IClaimsIdentity;
                 Claim tid = ci.Claims.Where(c => c.ClaimType == "http://schemas.microsoft.com/identity/claims/tenantid").First();
@@ -93,6 +97,7 @@ namespace Red.Controllers
             }
             catch (Exception ex)
             {
+                // A tenant admin needs to sign up for the app and grant it permission (via consent) before it can write to a tenant.
                 if (ex.Message.Contains("Authorization_IdentityNotFound"))
                 {
                     ViewBag.GetGroupsStatus = "Your admin needs to sign in once before you can get groups.";

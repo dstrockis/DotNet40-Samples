@@ -22,6 +22,7 @@ namespace Red.Controllers
         [ValidateInput(false)]
         public ActionResult Login()
         {
+            // Redirect to AAD for login.
             if (!Request.IsAuthenticated)
             {
                 WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
@@ -40,7 +41,7 @@ namespace Red.Controllers
                 WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
                 WsFam.SignOut(false);
 
-                // Issue a sign out request to remove the STS session, etc.
+                // Issue a sign out request to remove the STS session, etc.  This will cause an SSOut.
                 SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply);
                 String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
                 return new RedirectResult(signOutRequest);
@@ -54,6 +55,10 @@ namespace Red.Controllers
         public ActionResult CreateUser(CreateUserModel user)
         {
             ViewBag.CreateUserStatus = "";
+
+            // In the RED & BLUE apps, the apps call the directory as themselves, and have
+            // been given the authorization/trust to do so.  It is up to the apps to enforce
+            // that only "Admins" can create users.
             if (!User.Identity.IsAuthenticated || !User.IsInRole(RocRole.Admin))
             {
                 return new RedirectResult("/?createUserStatus=Please sign in as an Admin to create users.");
@@ -64,6 +69,7 @@ namespace Red.Controllers
             var userName = user.UserName;
             var client = user.Client;
 
+            // Validate Inputs.
             if (firstName == string.Empty || lastName == string.Empty || userName == string.Empty || client == string.Empty)
             {
                 return new RedirectResult("/?createUserStatus=lease enter values for all user fields.");
@@ -74,6 +80,7 @@ namespace Red.Controllers
 
             try
             {
+                // Get a token for the Graph API using the identity & privileges of the application, not the user.
                 ClientCredential cc = new ClientCredential(ConfigurationManager.AppSettings["ida:ClientId"], ConfigurationManager.AppSettings["ida:AppKey"]);
                 AuthenticationContext authContext = new AuthenticationContext(String.Format(TenantConfig.authorityFormat, TenantConfig.ClientToTenantMapping[client]));
                 AuthenticationResult ar = authContext.AcquireToken(TenantConfig.graphResourceId, cc);
@@ -110,6 +117,7 @@ namespace Red.Controllers
             }
             catch (Exception ex)
             {
+                // A tenant admin needs to sign up for the app and grant it permission (via consent) before it can write to a tenant.
                 if (ex.Message.Contains("Authorization_IdentityNotFound"))
                 {
                     return new RedirectResult("/?createUserStatus=An admin of client " + client + " needs to sign in once before you can create users.");
@@ -119,6 +127,7 @@ namespace Red.Controllers
 
             }
 
+            // Success!
             return new RedirectResult("/?userCreatedStatus=" + "User " + newUpn + " created with temporary password " + newPw + ".");
         }
     }

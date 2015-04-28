@@ -24,13 +24,18 @@ namespace Red
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // These handlers handle inactivity timeouts.
             FederatedAuthentication.SessionAuthenticationModule.SessionSecurityTokenReceived += new EventHandler<SessionSecurityTokenReceivedEventArgs>(SessionAuthenticationModule_SessionSecurityTokenReceived);
             FederatedAuthentication.ServiceConfigurationCreated += FederatedAuthentication_ServiceConfigurationCreated;
+            
+            // This handler handles WsFed Single Sign Out
             FederatedAuthentication.WSFederationAuthenticationModule.SigningOut +=WSFederationAuthenticationModule_SigningOut;
         }
 
         private void WSFederationAuthenticationModule_SigningOut(object sender, SigningOutEventArgs e)
         {
+            // If AAD sent an SSOut Request, honor it.
             if (e.IsIPInitiated)
             {
                 // Remove the application cookies, etc.
@@ -42,11 +47,13 @@ namespace Red
 
         private void FederatedAuthentication_ServiceConfigurationCreated(object sender, Microsoft.IdentityModel.Web.Configuration.ServiceConfigurationCreatedEventArgs e)
         {
+            // Configure our custom SecurityTokenHandler.
             e.ServiceConfiguration.SecurityTokenHandlers.AddOrReplace(new TenantDependentSessionHandler());
         }
 
         private void SessionAuthenticationModule_SessionSecurityTokenReceived(object sender, SessionSecurityTokenReceivedEventArgs e)
         {
+            // Handle a user inactivity timeout.
             if (e.SessionToken.ValidTo < DateTime.UtcNow)
             {
                 // Remove the application cookies, etc.

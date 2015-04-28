@@ -15,7 +15,7 @@ namespace Blue.Account
                 WSFederationAuthenticationModule WsFam = FederatedAuthentication.WSFederationAuthenticationModule;
                 WsFam.SignOut(false);
 
-                // Issue a sign out request to remove the STS session, etc.
+                // Issue a sign out request to remove the STS session, etc.  This will trigger an SSOut.
                 SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply);
                 String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
                 Response.Redirect(signOutRequest);

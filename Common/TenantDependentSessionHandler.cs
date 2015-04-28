@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Claims;
 
 namespace Common
 {
+    // This custom session handler sets app session lifetimes according to the security rules found in TenantConfig.
+    // It allows you to enforce different timeouts for different organizations.
     public class TenantDependentSessionHandler : SessionSecurityTokenHandler
     {
         public override SessionSecurityToken CreateSessionSecurityToken(Microsoft.IdentityModel.Claims.IClaimsPrincipal principal, string context, string endpointId, DateTime validFrom, DateTime validTo)

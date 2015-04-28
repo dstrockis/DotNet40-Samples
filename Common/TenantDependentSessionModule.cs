@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Claims;
 
 namespace Common
 {
+    // This class implements sliding sessions, so that the user remains logged in as long as they are active
+    // in the application.
     public class TenantDependentSessionModule : SessionAuthenticationModule
     {
         protected override void OnSessionSecurityTokenReceived(SessionSecurityTokenReceivedEventArgs args)

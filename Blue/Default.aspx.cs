@@ -22,6 +22,7 @@ namespace Blue
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Zero code was required for doing authorization, only assiging users to app roles in the Azure Portal.
             bool isAuthorizedUser = User.IsInRole(RocRole.User) || User.IsInRole(RocRole.Manager) || User.IsInRole(RocRole.Admin);
             bool isPowerUser = User.IsInRole(RocRole.Manager) || User.IsInRole(RocRole.Admin);
             bool isSuperUser = User.IsInRole(RocRole.Admin);
@@ -32,6 +33,7 @@ namespace Blue
 
             txtSaml.Text = @"Please login to view SAML token content.";
 
+            // The SAML token content is automatically populated in the ClaimsIdentity.
             if (User.Identity.IsAuthenticated) 
             {
                 var samlText = string.Empty;
@@ -53,6 +55,7 @@ namespace Blue
 
             try
             {
+                // Get a token for the Graph API in the context of the user's tenant.  Admins from hospital A can't see groups in hopital B.
                 ClientCredential cc = new ClientCredential(ConfigurationManager.AppSettings["ida:ClientId"], ConfigurationManager.AppSettings["ida:AppKey"]);
                 IClaimsIdentity ci = User.Identity as IClaimsIdentity;
                 Claim tid = ci.Claims.Where(c => c.ClaimType == "http://schemas.microsoft.com/identity/claims/tenantid").First();
@@ -84,6 +87,7 @@ namespace Blue
             }
             catch (Exception ex)
             {
+                // A tenant admin needs to sign up for the app and grant it permission (via consent) before it can write to a tenant.
                 if (ex.Message.Contains("Authorization_IdentityNotFound"))
                 {
                     GetGroupsStatus.Text = "Your admin needs to sign in once before you can get groups.";
@@ -102,6 +106,9 @@ namespace Blue
 
         protected void ButtonCreate_Click(object sender, EventArgs e)
         {
+            // In the RED & BLUE apps, the apps call the directory as themselves, and have
+            // been given the authorization/trust to do so.  It is up to the apps to enforce
+            // that only "Admins" can create users.
             if (!User.Identity.IsAuthenticated || !User.IsInRole(RocRole.Admin))
             {
                 CreateUserStatus.Text = "Please sign in as an Admin to create users.";
@@ -126,6 +133,7 @@ namespace Blue
 
             try
             {
+                // Get a token for the Graph API using the identity & privileges of the application, not the user.
                 ClientCredential cc = new ClientCredential(ConfigurationManager.AppSettings["ida:ClientId"], ConfigurationManager.AppSettings["ida:AppKey"]);
                 AuthenticationContext authContext = new AuthenticationContext(String.Format(TenantConfig.authorityFormat, TenantConfig.ClientToTenantMapping[client]));
                 AuthenticationResult ar = authContext.AcquireToken(TenantConfig.graphResourceId, cc);
@@ -171,6 +179,7 @@ namespace Blue
             }
             catch (Exception ex)
             {
+                // A tenant admin needs to sign up for the app and grant it permission (via consent) before it can write to a tenant.
                 if (ex.Message.Contains("Authorization_IdentityNotFound"))
                 {
                     CreateUserStatus.Text = "An admin of client " + client + " needs to sign in once before you can create users.";

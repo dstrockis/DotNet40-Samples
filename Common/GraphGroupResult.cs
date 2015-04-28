@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
+
+// This class is just used for deserializing the JSON result from the Graph API.
 namespace Common
 {
     [DataContract]

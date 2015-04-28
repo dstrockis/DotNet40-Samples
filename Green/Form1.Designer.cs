@@ -48,6 +48,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.StatusBar = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(676, 21);
+            this.label2.Location = new System.Drawing.Point(312, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 3;
@@ -151,7 +153,7 @@
             this.txt_Saml.Name = "txt_Saml";
             this.txt_Saml.Size = new System.Drawing.Size(486, 507);
             this.txt_Saml.TabIndex = 5;
-            this.txt_Saml.Text = "(SAML content)";
+            this.txt_Saml.Text = "Please login to view token contents.";
             // 
             // groupBox1
             // 
@@ -176,7 +178,8 @@
             this.cbClient.FormattingEnabled = true;
             this.cbClient.Items.AddRange(new object[] {
             "Hospital System A",
-            "Hospital System B"});
+            "Hospital System B",
+            "Default Tenant"});
             this.cbClient.Location = new System.Drawing.Point(117, 122);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(235, 21);
@@ -249,11 +252,30 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "First Name:";
             // 
+            // StatusBar
+            // 
+            this.StatusBar.AutoSize = true;
+            this.StatusBar.Location = new System.Drawing.Point(18, 55);
+            this.StatusBar.Name = "StatusBar";
+            this.StatusBar.Size = new System.Drawing.Size(0, 13);
+            this.StatusBar.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 55);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "label6";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 659);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txt_Saml);
             this.Controls.Add(this.btn_Admin);
@@ -296,6 +318,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbClient;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label StatusBar;
+        private System.Windows.Forms.Label label6;
     }
 }
 

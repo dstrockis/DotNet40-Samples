@@ -7,6 +7,9 @@ using System.Text;
 using Microsoft.IdentityModel.Web;
 using System.Web;
 
+
+// This class is only necessary because WsFed SSO does not work out of the box
+// with MVC applications, as it does with asp.net.
 namespace Red
 {
     class WsFedSSOutAuthenticationModule : WSFederationAuthenticationModule
