@@ -193,6 +193,7 @@ namespace Green
             label6.Visible = false;
             ClearCookies();
             authContext.TokenCacheStore.Clear();
+            authContext = new AuthenticationContext(String.Format(TenantConfig.authorityFormat, "common"));
             txt_Saml.Text = "";
             label2.Text = "(user_name)";
             UpdateUI();
