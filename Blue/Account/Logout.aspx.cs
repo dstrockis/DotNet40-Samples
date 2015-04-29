@@ -19,7 +19,10 @@ namespace Blue.Account
                 SignOutRequestMessage signOutRequestMessage = new SignOutRequestMessage(new Uri(WsFam.Issuer), WsFam.Reply);
                 String signOutRequest = signOutRequestMessage.WriteQueryString() + "&wtrealm=" + WsFam.Realm;
                 Response.Redirect(signOutRequest);
+                return;
             }
+
+            Response.Redirect("/");
         }
     }
 }
